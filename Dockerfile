@@ -40,8 +40,8 @@ RUN echo "packages: ./ ./../biohazard" > cabal.project
 RUN cabal install .
 
 # Copy only the executables from the build-stage to decrease image size
-FROM --platform=linux/amd64 alpine:3.21 AS final
+FROM alpine:3.21 AS final
 COPY --from=build /root/.cabal/bin /root/.cabal/bin
-ENV PATH="$PATH:/root/.ghcup/bin"
+ENV PATH="$PATH:/root/.cabal/bin"
 RUN which bam-trim
 RUN bam-trim --help
