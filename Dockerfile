@@ -22,7 +22,9 @@ RUN ghcup install ghc 8.10.7
 RUN ghcup set 8.10.7
 
 # Add cabal and ghc to PATH
+RUN echo $PATH
 ENV PATH="$PATH:~/.ghcup/bin"
+RUN echo $PATH
 
 # Install biohazard
 RUN git clone https://ustenzel@bitbucket.org/ustenzel/biohazard.git
