@@ -14,24 +14,21 @@ RUN apk update && apk add --no-cache \
 RUN curl -L https://downloads.haskell.org/~ghcup/x86_64-linux-ghcup -o /usr/bin/ghcup && \
     chmod +x /usr/bin/ghcup
 
+# Not sure this is necessary (?)
 ENV PATH="$HOME/.cabal/bin:$HOME/.ghcup/bin:$PATH"
 
-# TODO, convert to single command with &&
-RUN ghcup install cabal 3.2.0.0
-RUN ghcup install ghc 8.10.7
-RUN ghcup set 8.10.7
+# Install specific version of cabal and ghc
+RUN ghcup install cabal 3.2.0.0 && \
+    ghcup install ghc 8.10.7 && \
+    ghcup set 8.10.7
 
 # Add cabal and ghc to PATH
-RUN echo $PATH
-ENV PATH="$PATH:/root/.ghcup/bin"
-RUN echo $PATH
-
-RUN ~/.ghcup/bin/ghc --version
-RUN ~/.ghcup/bin/cabal --version
+ENV PATH="$PATH:/$HOME/.ghcup/bin"
 
 # Install biohazard
 RUN git clone https://ustenzel@bitbucket.org/ustenzel/biohazard.git
 WORKDIR biohazard
+RUN cabal update
 RUN cabal configure
 RUN cabal build
 RUN cabal install --lib .
