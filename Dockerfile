@@ -30,14 +30,14 @@ WORKDIR /root/biohazard
 RUN cabal update && \
     cabal configure && \
     cabal build && \
-    cabal install --lib .
+    cabal install --lib --install-method=copy .
 
 # Install biohazard-tools
 WORKDIR /root
 RUN git clone https://ustenzel@bitbucket.org/ustenzel/biohazard-tools.git
 WORKDIR /root/biohazard-tools
 RUN echo "packages: ./ ./../biohazard" > cabal.project
-RUN cabal install .
+RUN cabal install --install-method=copy .
 
 # Final stage, only copy executables and have minimal dependencies
 FROM alpine:3.21 AS final
