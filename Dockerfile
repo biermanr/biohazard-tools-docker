@@ -8,7 +8,8 @@ RUN apk update && apk add --no-cache \
     bash curl git make m4 gcc g++ ocaml \
     ocaml-compiler-libs opam findutils \
     linux-headers gmp-dev \
-    binutils-gold libc-dev libffi-dev musl-dev ncurses-dev perl tar xz
+    binutils-gold libc-dev libffi-dev musl-dev ncurses-dev perl tar xz \
+    zlib-dev
 
 # download and install ghcup
 RUN curl -L https://downloads.haskell.org/~ghcup/x86_64-linux-ghcup -o /usr/bin/ghcup && \
