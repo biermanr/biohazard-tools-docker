@@ -23,7 +23,7 @@ RUN ghcup set 8.10.7
 
 # Add cabal and ghc to PATH
 RUN echo $PATH
-ENV PATH="$PATH:~/.ghcup/bin"
+ENV PATH="$PATH:/root/.ghcup/bin"
 RUN echo $PATH
 
 RUN ~/.ghcup/bin/ghc --version
