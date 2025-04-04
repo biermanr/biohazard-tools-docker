@@ -1,7 +1,7 @@
 # Install specific verions of ghc and cabal to
 # install biohazard and biohazard-tools
 # Much of this is stolen from: https://discourse.haskell.org/t/good-way-of-installing-specific-cabal-and-ghc-inside-a-docker-container/9930
-FROM alpine:3.21 AS build
+FROM alpine:3.21
 
 # Install necessary dependencies
 RUN apk update && apk add --no-cache \
@@ -39,11 +39,4 @@ WORKDIR /root/biohazard-tools
 RUN echo "packages: ./ ./../biohazard" > cabal.project
 RUN cabal install .
 
-RUN /root/.cabal/bin/fastq2bam --help
-
-# Copy only the executables from the build-stage to decrease image size
-FROM alpine:3.21 AS final
-COPY --from=build /root/.cabal/bin .
-RUN ls .
-RUN ./fastq2bam --help
-RUN ./bam-trim --help
+ENV PATH="$PATH:/root/.cabal/bin"
