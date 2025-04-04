@@ -26,6 +26,9 @@ RUN echo $PATH
 ENV PATH="$PATH:~/.ghcup/bin"
 RUN echo $PATH
 
+RUN ~/.ghcup/bin/ghc --version
+RUN ~/.ghcup/bin/cabal --version
+
 # Install biohazard
 RUN git clone https://ustenzel@bitbucket.org/ustenzel/biohazard.git
 WORKDIR biohazard
