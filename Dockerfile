@@ -24,23 +24,25 @@ RUN ghcup install cabal 3.2.0.0 && \
 ENV PATH="$PATH:/root/.ghcup/bin"
 
 # Install biohazard
+WORKDIR /root
 RUN git clone https://ustenzel@bitbucket.org/ustenzel/biohazard.git
-WORKDIR biohazard
+WORKDIR /root/biohazard
 RUN cabal update && \
     cabal configure && \
     cabal build && \
     cabal install --lib .
 
 # Install biohazard-tools
-WORKDIR ..
+WORKDIR /root
 RUN git clone https://ustenzel@bitbucket.org/ustenzel/biohazard-tools.git
-WORKDIR biohazard-tools
+WORKDIR /root/biohazard-tools
 RUN echo "packages: ./ ./../biohazard" > cabal.project
 RUN cabal install .
 
-RUN ls /root/cabal/bin
+RUN ls /root/.cabal/bin
+RUN which bam-trim
 
 # Copy only the executables from the build-stage to decrease image size
 FROM --platform=linux/amd64 alpine:3.21 AS final
-COPY --from=build /root/cabal/bin .
+COPY --from=build /root/.cabal/bin .
 RUN ls
