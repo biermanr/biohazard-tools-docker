@@ -1,7 +1,7 @@
 # Install specific verions of ghc and cabal to
 # install biohazard and biohazard-tools
 # Much of this is stolen from: https://discourse.haskell.org/t/good-way-of-installing-specific-cabal-and-ghc-inside-a-docker-container/9930
-FROM --platform=linux/amd64 alpine:3.21
+FROM --platform=linux/amd64 alpine:3.21 AS build
 
 # Install necessary dependencies
 RUN apk update && apk add --no-cache \
@@ -26,10 +26,10 @@ ENV PATH="$PATH:/root/.ghcup/bin"
 # Install biohazard
 RUN git clone https://ustenzel@bitbucket.org/ustenzel/biohazard.git
 WORKDIR biohazard
-RUN cabal update
-RUN cabal configure
-RUN cabal build
-RUN cabal install --lib .
+RUN cabal update && \
+    cabal configure && \
+    cabal build && \
+    cabal install --lib .
 
 # Install biohazard-tools
 WORKDIR ..
@@ -38,6 +38,9 @@ WORKDIR biohazard-tools
 RUN echo "packages: ./ ./../biohazard" > cabal.project
 RUN cabal install .
 
-# TODO make a multistage build and just copy the executables
+RUN ls /root/cabal/bin
 
-ENTRYPOINT ["ls"]
+# Copy only the executables from the build-stage to decrease image size
+FROM --platform=linux/amd64 alpine:3.21 AS final
+COPY --from=build /root/cabal/bin .
+RUN ls
