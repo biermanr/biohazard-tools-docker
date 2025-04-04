@@ -39,6 +39,8 @@ WORKDIR /root/biohazard-tools
 RUN echo "packages: ./ ./../biohazard" > cabal.project
 RUN cabal install .
 
+RUN /root/.cabal/bin/fastq2bam --help
+
 # Copy only the executables from the build-stage to decrease image size
 FROM alpine:3.21 AS final
 COPY --from=build /root/.cabal/bin .
