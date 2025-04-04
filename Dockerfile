@@ -41,8 +41,9 @@ RUN cabal install .
 
 # Copy only the executables from the build-stage to decrease image size
 FROM alpine:3.21 AS final
-COPY --from=build /root/.cabal/bin /root/.cabal/bin
-ENV PATH="$PATH:/root/.cabal/bin"
-RUN /root/.cabal/bin/bam-trim --help
+COPY --from=build /root/.cabal/bin .
+ENV PATH="$PATH:."
+RUN ls
+RUN .cabal/bam-trim --help
 RUN which bam-trim
 RUN bam-trim --help
