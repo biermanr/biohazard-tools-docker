@@ -47,12 +47,11 @@ ENV PATH="$PATH:/usr/local/bin"
 
 # Install necessary dependencies
 RUN apk update && apk add --no-cache \
-    bash curl git make m4 gcc g++ ocaml \
-    ocaml-compiler-libs opam findutils \
+    bash m4 ocaml \
+    opam findutils \
     linux-headers gmp-dev \
     binutils-gold libc-dev libffi-dev musl-dev ncurses-dev perl tar xz \
     zlib-dev
 
 RUN ldd /usr/local/bin/fastq2bam
-RUN file /usr/local/bin/fastq2bam
 RUN fastq2bam --help
