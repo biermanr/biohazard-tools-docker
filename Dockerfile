@@ -21,21 +21,22 @@ RUN ghcup install cabal 3.2.0.0
 RUN ghcup install ghc 8.10.7
 RUN ghcup set 8.10.7
 
-RUN ~/.ghcup/bin/cabal update
+# Add cabal and ghc to PATH
+ENV PATH="$PATH:~/.ghcup/bin"
 
 # Install biohazard
 RUN git clone https://ustenzel@bitbucket.org/ustenzel/biohazard.git
 WORKDIR biohazard
-RUN ~/.ghcup/bin/cabal configure
-RUN ~/.ghcup/bin/cabal build
-RUN ~/.ghcup/bin/cabal install --lib .
+RUN cabal configure
+RUN cabal build
+RUN cabal install --lib .
 
 # Install biohazard-tools
 WORKDIR ..
 RUN git clone https://ustenzel@bitbucket.org/ustenzel/biohazard-tools.git
 WORKDIR biohazard-tools
 RUN echo "packages: ./ ./../biohazard" > cabal.project
-RUN ~/.ghcup/bin/cabal install .
+RUN cabal install .
 
 # TODO make a multistage build and just copy the executables
 
