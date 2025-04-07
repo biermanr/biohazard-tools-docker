@@ -29,8 +29,6 @@ TODO's
 |   4 | RUN  /bin/sh -c chmod +x                                                               |          32 B  |
 |   5 | ENV  PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/local/bin  |           0 B  |
 |   6 | RUN  /bin/sh -c apk update                                                             |   **23.22 MB** |
-|   7 | RUN  /bin/sh -c ldd /usr/local/bin/fastq2bam                                           |          32 B  |
-|   8 | RUN  /bin/sh -c fastq2bam --help                                                       |          32 B  |
 
 - Release version 1.0.0
 
