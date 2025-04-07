@@ -10,78 +10,58 @@ log.info """\
          """
          .stripIndent()
 
-//
-//process bam-dir {
-//    input:
-//        ???
-//    output:
-//        ???
-//    """
-//    bam-dir \
-//        $bam
-//    """
-//}
-//
-//process bam-fixpair {
-//    input:
-//        ???
-//    output:
-//        ???
-//    """
-//    bam-fixpair \
-//        $bam
-//    """
-//}
-//
+
+process bam-dir {
+    """
+    bam-dir --help
+    wget https://ftp.sra.ebi.ac.uk/vol1/analysis/ERZ004/ERZ004000/accepted_hits.bam
+
+    bam-dir index accepted_hits.bam
+    bam-dir lookup -f accepted_hits.bam VADER:27:C0A58ACXX:1:1102:1434:2091
+    """
+}
+
+process bam-fixpair {
+    """
+    bam-fixpair --help
+    wget https://ftp.sra.ebi.ac.uk/vol1/analysis/ERZ004/ERZ004000/accepted_hits.bam
+
+    bam-fixpair --quiet --output fixed_accepted_hits.bam accepted_hits.bam
+    """
+}
+
 //process bam-mangle {
-//    input:
-//        ???
-//    output:
-//        ???
 //    """
 //    bam-mangle \
 //        $bam
 //    """
 //}
-//
+
 //process bam-meld {
-//    input:
-//        ???
-//    output:
-//        ???
 //    """
 //    bam-meld \
 //        $bam
 //    """
 //}
-//
+
 //process bam-rewrap {
-//    input:
-//        ???
-//    output:
-//        ???
 //    """
 //    bam-rewrap \
 //        $bam
 //    """
 //}
-//
-//process bam-rmdup {
-//    input:
-//        ???
-//    output:
-//        ???
-//    """
-//    bam-rmdup \
-//        $bam
-//    """
-//}
+
+process bam-rmdup {
+    """
+    bam-rmdup --help
+
+    wget https://ftp.sra.ebi.ac.uk/vol1/analysis/ERZ004/ERZ004000/accepted_hits.bam
+
+    bam-rmdup accepted_hits.bam
+    """
+}
 //
 //process expound {
-//    input:
-//        ???
-//    output:
-//        ???
 //    """
 //    expound \
 //        $bam
@@ -103,5 +83,8 @@ process fastq2bam {
 }
 
 workflow {
+    bam-dir()
+    bam-fixpair()
+    bam-rmdup()
     fastq2bam()
 }
