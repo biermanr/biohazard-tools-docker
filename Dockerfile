@@ -47,4 +47,4 @@ ENV PATH="$PATH:/usr/local/bin"
 
 # Install runtime dependencies
 RUN apk update && apk add --no-cache \
-    bash m4 zlib-dev xz linux-headers
+    bash m4 zlib-dev xz linux-headers gmp-dev
