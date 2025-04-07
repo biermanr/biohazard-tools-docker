@@ -49,5 +49,4 @@ ENV PATH="$PATH:/usr/local/bin"
 RUN apk update && apk add --no-cache \
     bash m4 \
     linux-headers gmp-dev \
-    binutils-gold libc-dev libffi-dev musl-dev ncurses-dev perl tar xz \
-    zlib-dev
+    zlib-dev xz
