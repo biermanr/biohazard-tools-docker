@@ -71,14 +71,13 @@ process bamRmdup {
 process fastq2bam {
     """
     fastq2bam --help
-
-    wget https://ftp.sra.ebi.ac.uk/vol1/fastq/SRR325/008/SRR32596108/SRR32596108_1.fastq.gz
-    wget https://ftp.sra.ebi.ac.uk/vol1/fastq/SRR325/008/SRR32596108/SRR32596108_2.fastq.gz
+    wget https://ftp.sra.ebi.ac.uk/vol1/fastq/SRR781/000/SRR7810700/SRR7810700_1.fastq.gz
+    wget https://ftp.sra.ebi.ac.uk/vol1/fastq/SRR781/000/SRR7810700/SRR7810700_2.fastq.gz
 
     fastq2bam \
-        --read-one SRR32596108_1.fastq.gz \
-        --read-two SRR32596108_2.fastq.gz \
-        --output SRR32596108.ubam
+        --read-one SRR7810700_1.fastq.gz \
+        --read-two SRR7810700_2.fastq.gz \
+        --output SRR7810700.ubam
     """
 }
 

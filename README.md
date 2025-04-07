@@ -3,15 +3,18 @@ Dockerized biohazard-tools from https://bitbucket.org/ustenzel/biohazard-tools/s
 
 Docker images here: https://hub.docker.com/repository/docker/rbiermanpu/biohazard-tools/general
 
-Currently "dev" tag is ~850MB when using a Docker single-stage build. amd64 arch only for now.
-
-Attempting to decrease image size with a multi-stage build. Initial success with a ~200MB image with tag "multi_dev". This is pretty good, wonder if it can be better.
-- Also needs testing of the different executables
-
+Example using docker run: TODO!
+```
+docker run --rm rbiermanpu/biohazard-tools:dev bash example.bash
+```
 
 TODO's
-- Test the different executables
-- Decrease image size by minimizing `apk update` command (step 6)
+- Add documentation example
+
+- Test the different executables (still not testing mangle, meld, rewrap, expound)
+    - Run the tests in parallel jobs on GHA?
+
+- Decrease image size by removing unnecessary packages from `apk update` command (step 6)
 
 | Step | Command | Size |
 | --- | -------------------------------------------------------------------------------------- | -------------- |
@@ -24,6 +27,9 @@ TODO's
 |   7 | RUN  /bin/sh -c ldd /usr/local/bin/fastq2bam                                           |          32 B  |
 |   8 | RUN  /bin/sh -c fastq2bam --help                                                       |          32 B  |
 
+- Release version 1.0.0
 
 - Create a macOS amd64 and arm64 platform build
+
 - ??
+

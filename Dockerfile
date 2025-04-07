@@ -47,8 +47,7 @@ ENV PATH="$PATH:/usr/local/bin"
 
 # Install necessary dependencies
 RUN apk update && apk add --no-cache \
-    bash m4 ocaml \
-    opam findutils \
+    bash m4 \
     linux-headers gmp-dev \
     binutils-gold libc-dev libffi-dev musl-dev ncurses-dev perl tar xz \
     zlib-dev
