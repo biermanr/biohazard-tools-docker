@@ -52,6 +52,3 @@ RUN apk update && apk add --no-cache \
     linux-headers gmp-dev \
     binutils-gold libc-dev libffi-dev musl-dev ncurses-dev perl tar xz \
     zlib-dev
-
-RUN ldd /usr/local/bin/fastq2bam
-RUN fastq2bam --help
