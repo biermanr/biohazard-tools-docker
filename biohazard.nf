@@ -1,10 +1,5 @@
 nextflow.enable.dsl=2
 
-// Required inputs
-params.sampleSheet = file_exists(param_set(params.sampleSheet,"--sampleSheet"))
-params.outputDir = file(param_set(params.outputDir, "--outputDir"))
-
-
 // Write info to stdout about the current run
 log.info """\
          biohazard-tools 
