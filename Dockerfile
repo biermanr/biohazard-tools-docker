@@ -44,3 +44,7 @@ FROM alpine:3.21 AS final
 COPY --from=build /root/.cabal/bin /usr/local/bin
 RUN chmod +x /usr/local/bin/*
 ENV PATH="$PATH:/usr/local/bin"
+
+# Install runtime dependencies
+RUN apk update && apk add --no-cache \
+    bash m4 zlib-dev xz linux-headers
