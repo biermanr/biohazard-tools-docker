@@ -11,7 +11,7 @@ log.info """\
          .stripIndent()
 
 
-process bam-dir {
+process bamDir {
     """
     bam-dir --help
     wget https://ftp.sra.ebi.ac.uk/vol1/analysis/ERZ004/ERZ004000/accepted_hits.bam
@@ -21,7 +21,7 @@ process bam-dir {
     """
 }
 
-process bam-fixpair {
+process bamFixpair {
     """
     bam-fixpair --help
     wget https://ftp.sra.ebi.ac.uk/vol1/analysis/ERZ004/ERZ004000/accepted_hits.bam
@@ -30,28 +30,28 @@ process bam-fixpair {
     """
 }
 
-//process bam-mangle {
+//process bamMangle {
 //    """
 //    bam-mangle \
 //        $bam
 //    """
 //}
 
-//process bam-meld {
+//process bamMeld {
 //    """
 //    bam-meld \
 //        $bam
 //    """
 //}
 
-//process bam-rewrap {
+//process bamRewrap {
 //    """
 //    bam-rewrap \
 //        $bam
 //    """
 //}
 
-process bam-rmdup {
+process bamRmdup {
     """
     bam-rmdup --help
 
@@ -83,8 +83,8 @@ process fastq2bam {
 }
 
 workflow {
-    bam-dir()
-    bam-fixpair()
-    bam-rmdup()
+    bamDir()
+    bamFixpair()
+    bamRmdup()
     fastq2bam()
 }
