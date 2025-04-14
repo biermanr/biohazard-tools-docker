@@ -20,12 +20,12 @@ Example getting the help message for `bam-fixpair` using the docker image:
 docker run --rm rbiermanpu/biohazard-tools bam-fixpair --help
 ```
 
-To run the tests with nextflow and docker:
+To run the tests with nextflow and docker with the `biohazard.nf` included in this repo:
 ```
 nextflow run -with-docker rbiermanpu/biohazard-tools biohazard.nf
 ```
 
-To run the tests with nextflow and singularity:
+To run the tests with nextflow and singularity with the `biohazard.nf` included in this repo:
 ```
 nextflow run -with-singularity rbiermanpu/biohazard-tools biohazard.nf
 ```
