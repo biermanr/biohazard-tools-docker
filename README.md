@@ -1,9 +1,40 @@
 # biohazard-tools-docker
-Dockerized biohazard-tools from https://bitbucket.org/ustenzel/biohazard-tools/src/master/
+Dockerized biohazard-tools from https://bitbucket.org/ustenzel/biohazard-tools/src/master/ to provide the following tools:
+- bam-dir
+- bam-fixpair
+- bam-mangle
+- bam-meld
+- bam-rewrap
+- bam-rmdup
+- expound
+- fastq2bam
 
 Docker images here: https://hub.docker.com/repository/docker/rbiermanpu/biohazard-tools/general
 
-Currently "dev" tag is ~850MB when using a Docker single-stage build. amd64 arch only for now.
+Currently only supports the `linux/amd64` architecture.
 
-Attempting to decrease image size with a multi-stage build. Initial success with a ~200MB image with tag "multi_dev". This is pretty good, wonder if it can be better.
-- Also needs testing of the different executables
+Examples of usage:
+---
+Example getting the help message for `bam-fixpair` using the docker image:
+```
+docker run --rm rbiermanpu/biohazard-tools bam-fixpair --help
+```
+
+To run the tests with nextflow and docker with the `biohazard.nf` included in this repo:
+```
+nextflow run -with-docker rbiermanpu/biohazard-tools biohazard.nf
+```
+
+To run the tests with nextflow and singularity with the `biohazard.nf` included in this repo:
+```
+nextflow run -with-singularity rbiermanpu/biohazard-tools biohazard.nf
+```
+
+Further TODO's
+---
+
+- Test the all executables (still not testing mangle, meld, rewrap, expound)
+
+- Release version 1.0.0
+
+- Create a macOS amd64 and arm64 platform build
