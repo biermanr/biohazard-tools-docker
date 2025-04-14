@@ -27,7 +27,7 @@ nextflow run -with-docker rbiermanpu/biohazard-tools biohazard.nf
 
 To run the tests with nextflow and singularity:
 ```
-nextflow run -with-singularity rbiermanpu/biohazard-tools:dev biohazard.nf
+nextflow run -with-singularity rbiermanpu/biohazard-tools biohazard.nf
 ```
 
 Further TODO's

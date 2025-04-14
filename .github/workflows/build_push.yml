@@ -44,7 +44,7 @@ jobs:
               uses: docker/login-action@v3
               if: github.ref_name != 'main'
               with:
-                  username: ${{ secrets.DOCKERHUB_USERNAME }}
+                  username: rbiermanpu
                   password: ${{ secrets.DOCKERHUB_TOKEN }}
 
             - name: Docker build push
@@ -52,7 +52,7 @@ jobs:
               if: github.ref_name != 'main'
               with:
                   context: .
-                  tags: ${{ secrets.DOCKERHUB_USERNAME }}/biohazard-tools:${{ github.ref_name }}
+                  tags: rbiermanpu/biohazard-tools:${{ github.ref_name }}
                   cache-from: type=gha
                   cache-to: type=gha,mode=max
                   platforms: linux/amd64
@@ -61,19 +61,19 @@ jobs:
             - name: Docker test of pushed image
               if: github.ref_name != 'main'
               run: |
-                docker run --rm ${{ secrets.DOCKERHUB_USERNAME }}/biohazard-tools:${{ github.ref_name }} bam-fixpair --help
+                docker run --rm rbiermanpu/biohazard-tools:${{ github.ref_name }} bam-fixpair --help
 
             - name: Nextflow test of pushed image
               if: github.ref_name != 'main'
               run: |
-                nextflow run -with-docker ${{ secrets.DOCKERHUB_USERNAME }}/biohazard-tools:${{ github.ref_name }} biohazard.nf
+                nextflow run -with-docker rbiermanpu/biohazard-tools:${{ github.ref_name }} biohazard.nf
 
             - name: Docker build and push as "latest" if performing a release
               uses: docker/build-push-action@v5
               if: github.event_name == 'release'
               with:
                   context: .
-                  tags: ${{ secrets.DOCKERHUB_USERNAME }}/biohazard-tools
+                  tags: rbiermanpu/biohazard-tools
                   cache-from: type=gha
                   cache-to: type=gha,mode=max
                   platforms: linux/amd64
