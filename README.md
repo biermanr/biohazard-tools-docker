@@ -9,7 +9,7 @@ Dockerized biohazard-tools from https://bitbucket.org/ustenzel/biohazard-tools/s
 - expound
 - fastq2bam
 
-Docker images here: https://hub.docker.com/repository/docker/rbiermanpu/biohazard-tools/general
+Docker images here: https://hub.docker.com/r/rbiermanpu/biohazard-tools
 
 Currently only supports the `linux/amd64` architecture.
 
